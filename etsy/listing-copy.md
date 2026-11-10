@@ -45,3 +45,5 @@ PLEASE NOTE
 
 USE
 Personal use for your own business. You can send the finished invoice to your clients. Don’t resell, share, or give away the template file or the Canva link.
+
+The shop banner is separate from this listing text. Upload `etsy/shop-banner.png` as the big banner and `etsy/shop-icon.png` as the shop icon.

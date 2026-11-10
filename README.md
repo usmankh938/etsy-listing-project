@@ -20,6 +20,9 @@ The sample studio (Willow Studio), client, and prices are placeholders. They are
 | `preview/invoice-a4.pdf` | Print proof, A4 |
 | `etsy/listing-copy.md` | Title, tags, and description to paste into Etsy |
 | `etsy/buyer-instructions.md` | Words for the PDF buyers download |
+| `etsy/shop-banner.png` | Big shop banner, 3360 × 840 |
+| `etsy/shop-banner-1600.png` | Same banner at 1600 × 400 |
+| `etsy/shop-icon.png` | Shop icon, 500 × 500 |
 
 Import the PowerPoint into Canva. The text comes in as editable text. The SVG is the vector backup. The PNG and PDF are the listing photos and the print proof.
 
@@ -53,15 +56,28 @@ Every word is its own text box: business name, monogram letter, client, dates, l
 | Rule | `#C9C2B8` | Lines between line items |
 | Zebra | `#F6F3EE` | Alternating item rows |
 
+## Shop banner
+
+The banner matches the listing photos: warm paper, forest type, and the real invoice (not a redraw). Upload it under Shop Manager → Settings → Info & appearance.
+
+| File | Pixels | Use |
+| --- | --- | --- |
+| `etsy/shop-banner.png` | 3360 × 840 | Big banner. This is the size the Etsy seller handbook calls optimal. |
+| `etsy/shop-banner-1600.png` | 1600 × 400 | The same artwork at the size Etsy Help lists as recommended. |
+| `etsy/shop-icon.png` | 500 × 500 | Shop icon. The S sits inside the circle Etsy crops to. |
+
+Both banners are 4:1, which is the big-banner shape. The smallest file Etsy accepts for that slot is 1200 × 300. A mini banner is a different, shorter shape and is not included.
+
 ## Rebuild
 
 The previews are already built. To regenerate them after a layout change:
 
 ```bash
 python3 build.py
+python3 etsy/make_banner.py
 ```
 
-That needs Python 3 with `python-pptx`, `pillow`, and `pypdf`, plus Chrome. Fonts used for the proof are in `fonts/` (Playfair Display and Montserrat, SIL Open Font License). Canva already has both, so buyers do not need these files.
+The invoice build needs Python 3 with `python-pptx`, `pillow`, and `pypdf`, plus Chrome. The banner only needs `pillow`. Fonts used for the proof are in `fonts/` (Playfair Display and Montserrat, SIL Open Font License). Canva already has both, so buyers do not need these files.
 
 ## What the buyer receives
 
