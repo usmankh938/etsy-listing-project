@@ -1,0 +1,64 @@
+Editable layers in the Canva source
+Select a text box by this name in PowerPoint's Selection Pane.
+After import, the same words are editable in Canva.
+
+monogram: W
+business_name: WILLOW STUDIO
+tagline: Studio for small brands
+doc_title: INVOICE
+status: DUE
+invoice_number: INV-1042
+label_issued: Issued
+date_issued: November 10, 2026
+label_due: Due
+date_due: November 24, 2026
+label_bill_to: BILL TO
+bill_to_name: Avery Lane
+bill_to_address: 1842 Market Street / Portland, OR 97204 / avery@client.co
+label_from: FROM
+from_name: Willow Studio
+from_address: 210 Oak Avenue, Suite 4 / Austin, TX 78701 / hello@willowstudio.co / +1 (512) 555-0148
+col_description: DESCRIPTION
+col_qty: QTY
+col_rate: RATE
+col_amount: AMOUNT
+item_1_desc: Brand workshop
+item_1_qty: 1
+item_1_rate: 900.00
+item_1_amount: 900.00
+item_2_desc: Visual identity
+item_2_qty: 1
+item_2_rate: 2,200.00
+item_2_amount: 2,200.00
+item_3_desc: Packaging design
+item_3_qty: 1
+item_3_rate: 1,150.00
+item_3_amount: 1,150.00
+item_4_desc: Social templates
+item_4_qty: 2
+item_4_rate: 240.00
+item_4_amount: 480.00
+item_5_desc: (blank row — click and type)
+item_5_qty: (blank row — click and type)
+item_5_rate: (blank row — click and type)
+item_5_amount: (blank row — click and type)
+item_6_desc: (blank row — click and type)
+item_6_qty: (blank row — click and type)
+item_6_rate: (blank row — click and type)
+item_6_amount: (blank row — click and type)
+label_notes: NOTES
+notes: Payment is due within 14 days of the issue date. / Include the invoice number with your transfer. / Amounts in USD.
+label_payment: PAYMENT
+payment: Bank transfer   ·   PayPal   ·   Card
+label_subtotal: Subtotal
+subtotal: 4,730.00
+label_discount: Discount
+discount: 0.00
+label_tax: Tax
+tax: 0.00
+label_total: TOTAL
+total: $4,730.00
+label_signature: Signature
+label_sign_date: Date
+thanks: Thank you for your business.
+footer_contact: willowstudio.co    ·    hello@willowstudio.co
