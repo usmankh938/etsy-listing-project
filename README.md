@@ -13,9 +13,14 @@ The sample studio (Willow Studio), client, and prices are placeholders. They are
 | `source/invoice-us-letter.svg` | Vector version of the same layout |
 | `source/invoice-a4.svg` | Vector version, A4 |
 | `source/layers.txt` | Every text box name and the sample words in it |
-| `preview/hero-us-letter.png` | First Etsy photo (square) |
-| `preview/invoice-us-letter.png` | Full Letter page |
-| `preview/invoice-a4.png` | Full A4 page |
+| `preview/etsy/01-cover.png` | First Etsy photo, square thumbnail |
+| `preview/etsy/02-us-letter.png` | Letter page, 4:5 |
+| `preview/etsy/03-a4.png` | A4 page, 4:5 |
+| `preview/etsy/04-items.png` | Close-up of the header and line items |
+| `preview/etsy/05-totals.png` | Close-up of the notes and total |
+| `preview/etsy/06-how-to-edit.png` | How a buyer edits it in Canva |
+| `preview/invoice-us-letter.png` | Flat Letter proof |
+| `preview/invoice-a4.png` | Flat A4 proof |
 | `preview/invoice-us-letter.pdf` | Print proof, US Letter |
 | `preview/invoice-a4.pdf` | Print proof, A4 |
 | `etsy/listing-copy.md` | Title, tags, and description to paste into Etsy |
@@ -59,6 +64,7 @@ The previews are already built. To regenerate them after a layout change:
 
 ```bash
 python3 build.py
+python3 etsy_photos.py
 ```
 
 That needs Python 3 with `python-pptx`, `pillow`, and `pypdf`, plus Chrome. Fonts used for the proof are in `fonts/` (Playfair Display and Montserrat, SIL Open Font License). Canva already has both, so buyers do not need these files.

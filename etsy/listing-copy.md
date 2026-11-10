@@ -1,6 +1,6 @@
 # Etsy listing copy
 
-Paste this into the listing. The first photo is `preview/hero-us-letter.png`. Add the full Letter and A4 page images after it.
+Paste this into the listing. Upload the photos in `preview/etsy/` in filename order. `01-cover.png` is the thumbnail.
 
 ## Title
 
