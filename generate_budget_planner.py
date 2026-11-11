@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """
-Ultimate Annual & Monthly Budget Planner (Excel)
-------------------------------------------------
-A polished, formula-driven workbook that beats typical beige Etsy planners:
-setup-once recurring income/bills, 12 monthly dashboards, annual + quarterly
-views, 50/30/20, net worth, debt snowball/avalanche, sinking funds, emergency
+Premium Household Budget Planner (Excel + Google Sheets ready)
+--------------------------------------------------------------
+A polished, formula-driven household budget book that beats typical beige
+Etsy planners: dual-income household setup, paycheck budgeting, expense
+tracker, subscriptions, investments, no-spend challenges, setup-once
+recurring income/bills, 12 monthly dashboards, annual + quarterly views,
+50/30/20, net worth, debt snowball/avalanche, sinking funds, emergency
 fund runway, wealth projection, and an automated financial health score.
 """
 
@@ -258,79 +260,91 @@ def generate_sample_monthly() -> pd.DataFrame:
 def build_instructions(ws):
     title_block(
         ws,
-        "ULTIMATE ANNUAL & MONTHLY BUDGET PLANNER",
-        "Better than static beige templates — linked formulas, health scoring, debt payoff math, and wealth projection.",
+        "PREMIUM HOUSEHOLD BUDGET PLANNER",
+        "Excel & Google Sheets ready · Household budget book · Income, expenses, savings & debt — better than beige Etsy templates.",
         "G1",
     )
-    set_col_widths(ws, {"A": 28, "B": 55, "C": 22, "D": 18, "E": 18, "F": 18, "G": 18})
+    set_col_widths(ws, {"A": 28, "B": 58, "C": 22, "D": 18, "E": 18, "F": 18, "G": 18})
 
     ws["A4"] = "How to use (10 minutes)"
     ws["A4"].font = font(14, bold=True, color=COLORS["header"])
 
     steps = [
-        ("1. Setup", "Open the Setup tab. Enter your year, currency symbol, starting cash, and savings goal."),
-        ("2. Accounts", "List every bank / investment / credit account with balances on Accounts."),
-        ("3. Recurring", "Add paychecks & bills once on Recurring. They feed the Annual + Monthly sheets."),
-        ("4. Monthly", "Each month, log variable spend on that month’s tab (or paste from your bank CSV into Transactions)."),
-        ("5. Debt & Savings", "Update Debt Tracker and Sinking Funds. Snowball & Avalanche schedules auto-rank."),
-        ("6. Review", "Check Annual Dashboard, Quarterly, 50/30/20, Health Score, and Wealth Projection weekly."),
+        ("1. Setup", "Open Setup. Enter year, currency, household name, partners, pay frequency, and savings goals."),
+        ("2. Household", "Set Person A / Person B incomes and shared vs personal expense splits."),
+        ("3. Accounts", "List every bank, investment, and credit account on Accounts."),
+        ("4. Recurring", "Add paychecks & bills once. They feed Annual + Monthly sheets all year."),
+        ("5. Track spend", "Log variable expenses in Transactions (or paste a bank CSV). Use Subscriptions + Weekly Spend."),
+        ("6. Paycheck", "If you budget by paycheck, use Paycheck Budget for bi-weekly / irregular income."),
+        ("7. Debt & savings", "Update Debt Tracker, Sinking Funds, Investments, Emergency Fund."),
+        ("8. Review", "Check Annual Dashboard, 50/30/20, Health Score, and Wealth Projection weekly."),
     ]
     for i, (title, body) in enumerate(steps, start=5):
         ws.cell(row=i, column=1, value=title).font = font(11, bold=True, color=COLORS["accent"])
         ws.cell(row=i, column=2, value=body).font = font(11)
 
-    ws["A12"] = "What makes this better than typical Etsy beige planners"
-    ws["A12"].font = font(14, bold=True, color=COLORS["header"])
+    ws["A14"] = "Why this beats typical Etsy beige / household planners"
+    ws["A14"].font = font(14, bold=True, color=COLORS["header"])
     upgrades = [
-        "One Setup + Recurring engine that rolls into all 12 months (no retyping bills every month).",
-        "Live Annual Dashboard with charts, YTD totals, and month-over-month variance.",
-        "Financial Health Score (savings rate, emergency runway, debt burden, budget adherence).",
-        "Debt Snowball AND Avalanche payoff schedules with interest-aware estimates.",
-        "50/30/20 Needs / Wants / Savings tracker with automatic category classification.",
-        "Sinking funds + emergency fund runway (months of expenses covered).",
-        "5-year wealth projection using your actual average monthly surplus.",
-        "Sample year pre-filled so you can learn the system immediately, then replace with your numbers.",
-        "Warm professional palette that stays readable in Excel (no fragile pastel chaos).",
-        "Transaction log ready for bank exports — filter by month and category.",
+        "True household dual-income planner (Person A / Person B) with combined cash-flow view.",
+        "Paycheck Budget for bi-weekly and irregular income — not just calendar months.",
+        "Full Expense Tracker (Transactions) + Subscriptions audit + Weekly variable spend.",
+        "Setup-once Recurring engine that rolls into all 12 months (no retyping bills).",
+        "Annual Dashboard with charts, Quarterly rollups, and Income vs Expense distribution.",
+        "Financial Health Score (savings rate, emergency runway, debt burden, cash-flow months).",
+        "Debt Snowball AND Avalanche with interest-aware payoff estimates (NPER).",
+        "50/30/20 Needs / Wants / Savings with automatic category mapping.",
+        "Sinking funds, emergency runway, investments forecast, and 5-year wealth projection.",
+        "No-Spend Challenge tracker to cut discretionary leaks fast.",
+        "Google Sheets–compatible formulas (open the .xlsx in Drive → Open with Google Sheets).",
+        "Sample year pre-filled so the file is useful the moment you open it.",
     ]
-    for i, tip in enumerate(upgrades, start=13):
+    for i, tip in enumerate(upgrades, start=15):
         ws.cell(row=i, column=1, value="•").font = font(12, bold=True, color=COLORS["accent"])
         ws.merge_cells(start_row=i, start_column=2, end_row=i, end_column=6)
         ws.cell(row=i, column=2, value=tip)
 
-    ws["A24"] = "Tab map"
-    ws["A24"].font = font(14, bold=True, color=COLORS["header"])
+    ws["A28"] = "Tab map"
+    ws["A28"].font = font(14, bold=True, color=COLORS["header"])
     tabs = [
         ("Instructions", "You are here"),
-        ("Setup", "Year settings, goals, category rules"),
-        ("Accounts", "Net liquid + credit snapshot"),
+        ("Google Sheets Guide", "How to open this file in Google Sheets"),
+        ("Setup", "Year, currency, goals, category rules"),
+        ("Household", "Dual-income household cash flow"),
+        ("Accounts", "Bank / investment / credit snapshot"),
         ("Recurring", "Income & bills that auto-fill months"),
-        ("Transactions", "Manual / imported expense & income log"),
+        ("Transactions", "Expense & income tracker log"),
+        ("Subscriptions", "Recurring software/media/service audit"),
+        ("Weekly Spend", "Flexible weekly spending envelopes"),
+        ("Paycheck Budget", "Bi-weekly / irregular paycheck planner"),
+        ("Jan … Dec", "12 monthly Budget vs Actual dashboards"),
         ("Annual Dashboard", "Year overview + charts"),
+        ("Distribution", "Income & expense category mix"),
         ("Quarterly", "Q1–Q4 rollups"),
-        ("Jan … Dec", "12 monthly budget dashboards"),
         ("50-30-20", "Needs / Wants / Savings rule"),
         ("Net Worth", "Assets − liabilities over time"),
-        ("Debt Tracker", "Balances, APR, snowball & avalanche"),
+        ("Debt Tracker", "Snowball & avalanche payoff tools"),
         ("Sinking Funds", "Goal-based savings jars"),
         ("Emergency Fund", "Runway calculator"),
+        ("Investments", "Portfolio contribution forecast"),
         ("Wealth Projection", "5-year compound growth"),
         ("Health Score", "Automated financial health KPIs"),
+        ("No-Spend Challenge", "Discretionary spending challenges"),
         ("Bill Calendar", "Due-date payment schedule"),
     ]
-    style_header_row(ws, 25, 1, 2)
-    ws.cell(row=25, column=1, value="Tab")
-    ws.cell(row=25, column=2, value="Purpose")
-    for i, (tab, purpose) in enumerate(tabs, start=26):
+    style_header_row(ws, 29, 1, 2)
+    ws.cell(row=29, column=1, value="Tab")
+    ws.cell(row=29, column=2, value="Purpose")
+    for i, (tab, purpose) in enumerate(tabs, start=30):
         ws.cell(row=i, column=1, value=tab).border = THIN
         ws.cell(row=i, column=2, value=purpose).border = THIN
         if i % 2 == 0:
             ws.cell(row=i, column=1).fill = fill(COLORS["soft"])
             ws.cell(row=i, column=2).fill = fill(COLORS["soft"])
 
-    ws["A44"] = "Tip: Yellow/cream cells are inputs. Everything else is formula-driven — don’t overwrite formulas."
-    ws["A44"].font = font(11, bold=True, color=COLORS["warn"])
-    ws.merge_cells("A44:G44")
+    ws["A56"] = "Tip: Cream cells are inputs. Everything else is formula-driven — don’t overwrite formulas."
+    ws["A56"].font = font(11, bold=True, color=COLORS["warn"])
+    ws.merge_cells("A56:G56")
 
 
 def build_setup(ws):
@@ -343,26 +357,32 @@ def build_setup(ws):
     fields = [
         (5, "Budget Year", 2026),
         (6, "Currency Symbol", "$"),
-        (7, "Your Name / Household", "Sample Household"),
-        (8, "Pay Frequency", "Bi-weekly"),
-        (9, "Annual Savings Goal", 24000),
-        (10, "Starting Cash (Jan 1)", 8500),
-        (11, "Emergency Fund Target (months)", 6),
-        (12, "Expected Investment Return %", 0.075),
-        (13, "Starting Investable Nest Egg", 15000),
+        (7, "Household Name", "Sample Household"),
+        (8, "Person A Name", "Alex"),
+        (9, "Person B Name", "Jordan"),
+        (10, "Pay Frequency", "Bi-weekly"),
+        (11, "Annual Savings Goal", 24000),
+        (12, "Starting Cash (Jan 1)", 8500),
+        (13, "Emergency Fund Target (months)", 6),
+        (14, "Expected Investment Return %", 0.075),
+        (15, "Starting Investable Nest Egg", 15000),
     ]
     for row, label, value in fields:
         label_cell(ws.cell(row=row, column=1), label)
         c = ws.cell(row=row, column=2)
         input_cell(c, value)
-        if row in (9, 10, 13):
+        if row in (11, 12, 15):
             money_format(c)
-        if row == 12:
+        if row == 14:
             pct_format(c)
 
-    section_label(ws, "A15", "50/30/20 Targets", COLORS["accent"])
-    ws.merge_cells("A15:B15")
-    for row, label, value in [(16, "Needs %", 0.50), (17, "Wants %", 0.30), (18, "Savings/Debt %", 0.20)]:
+    freq_dv = DataValidation(type="list", formula1='"Monthly,Bi-weekly,Weekly,Semi-monthly"', allow_blank=False)
+    ws.add_data_validation(freq_dv)
+    freq_dv.add("B10")
+
+    section_label(ws, "A17", "50/30/20 Targets", COLORS["accent"])
+    ws.merge_cells("A17:B17")
+    for row, label, value in [(18, "Needs %", 0.50), (19, "Wants %", 0.30), (20, "Savings/Debt %", 0.20)]:
         label_cell(ws.cell(row=row, column=1), label)
         c = ws.cell(row=row, column=2)
         input_cell(c, value)
@@ -402,11 +422,14 @@ def build_setup(ws):
     ws.add_data_validation(dv)
     dv.add("E6:E23")
 
-    ws["A20"] = "Named ranges used across the workbook"
-    ws["A20"].font = font(12, bold=True, color=COLORS["header"])
-    ws["A21"] = "B5 = Year | B9 = Savings Goal | B10 = Starting Cash | B11 = EF months | B12 = Return | B13 = Nest Egg"
-    ws["A21"].font = font(10, color=COLORS["muted"])
-    ws.merge_cells("A21:F21")
+    ws["A22"] = "Key cells used across the workbook"
+    ws["A22"].font = font(12, bold=True, color=COLORS["header"])
+    ws["A23"] = (
+        "B5 Year · B8/B9 Partners · B11 Savings Goal · B12 Starting Cash · "
+        "B13 EF months · B14 Return · B15 Nest Egg · B18–B20 50/30/20"
+    )
+    ws["A23"].font = font(10, color=COLORS["muted"])
+    ws.merge_cells("A23:F23")
 
 
 def build_accounts(ws):
@@ -789,7 +812,7 @@ def build_annual_dashboard(ws, sample: pd.DataFrame):
     kpi_box(ws, 4, 3, "Annual Expenses", "=N10")
     kpi_box(ws, 4, 5, "Annual Savings", "=N11")
     kpi_box(ws, 4, 7, "Avg Savings Rate", "=N12", is_pct=True)
-    kpi_box(ws, 4, 9, "vs Savings Goal", "=N11-Setup!B9")
+    kpi_box(ws, 4, 9, "vs Savings Goal", "=N11-Setup!B11")
 
     # Matrix header
     ws["A8"] = "Category"
@@ -976,7 +999,7 @@ def build_502030(ws):
     label_cell(ws["E6"], "Actual %")
     label_cell(ws["F6"], "Variance $")
 
-    buckets = [("Needs", "Setup!B16"), ("Wants", "Setup!B17"), ("Savings", "Setup!B18")]
+    buckets = [("Needs", "Setup!B18"), ("Wants", "Setup!B19"), ("Savings", "Setup!B20")]
     # Actual formulas via SUMIF on annual category totals using Setup mapping
     # Needs = sum of categories mapped to Needs on Setup!E6:E23 against Annual N16:N33
     for i, (name, pct_ref) in enumerate(buckets, start=7):
@@ -1266,7 +1289,7 @@ def build_emergency(ws):
     money_format(ws["B5"])
 
     label_cell(ws["A6"], "Target Months (from Setup)")
-    ws["B6"] = "=Setup!B11"
+    ws["B6"] = "=Setup!B13"
 
     label_cell(ws["A7"], "Target Balance")
     ws["B7"] = "=B5*B6"
@@ -1301,10 +1324,10 @@ def build_wealth(ws):
     set_col_widths(ws, {"A": 18, "B": 18, "C": 18, "D": 18, "E": 18, "F": 22})
 
     label_cell(ws["A4"], "Starting Nest Egg")
-    ws["B4"] = "=Setup!B13"
+    ws["B4"] = "=Setup!B15"
     money_format(ws["B4"])
     label_cell(ws["A5"], "Expected Annual Return")
-    ws["B5"] = "=Setup!B12"
+    ws["B5"] = "=Setup!B14"
     pct_format(ws["B5"])
     label_cell(ws["A6"], "Avg Monthly Surplus")
     ws["B6"] = "='Annual Dashboard'!N11/12"
@@ -1459,22 +1482,517 @@ def build_bill_calendar(ws):
     ws.merge_cells("A22:N22")
 
 
+def build_google_sheets_guide(ws):
+    title_block(
+        ws,
+        "GOOGLE SHEETS GUIDE",
+        "This .xlsx is Excel-native and opens cleanly in Google Sheets — no separate fragile copy required.",
+        "F1",
+    )
+    set_col_widths(ws, {"A": 28, "B": 70, "C": 18, "D": 18, "E": 18, "F": 18})
+    steps = [
+        ("1. Upload", "Upload Premium_Household_Budget_Planner.xlsx to Google Drive."),
+        ("2. Open", "Right-click → Open with → Google Sheets."),
+        ("3. Make a copy", "File → Make a copy so you can edit safely."),
+        ("4. Keep formulas", "Do not convert charts to images; leave formulas intact."),
+        ("5. Currency", "Change Setup!B6 if you need €, £, etc. (display symbol for your notes)."),
+        ("6. Share", "Share the Sheet with your household partner (Editor)."),
+    ]
+    ws["A4"] = "Open in Google Sheets"
+    ws["A4"].font = font(14, bold=True, color=COLORS["header"])
+    for i, (t, b) in enumerate(steps, start=5):
+        ws.cell(row=i, column=1, value=t).font = font(11, bold=True, color=COLORS["accent"])
+        ws.cell(row=i, column=2, value=b)
+    ws["A12"] = "Compatibility notes"
+    ws["A12"].font = font(14, bold=True, color=COLORS["header"])
+    notes = [
+        "All core formulas use standard Excel/Sheets functions (SUMIFS, RANK, NPER, SUMPRODUCT, IF).",
+        "Charts created in Excel appear in Sheets; you can rebuild any chart from the Annual Dashboard data table.",
+        "Dropdown validations transfer; if a list is missing, re-add Data → Data validation.",
+        "Best on desktop Sheets or Excel 365. Not designed for Apple Numbers.",
+    ]
+    for i, n in enumerate(notes, start=13):
+        ws.cell(row=i, column=1, value="•").font = font(12, bold=True, color=COLORS["accent"])
+        ws.merge_cells(start_row=i, start_column=2, end_row=i, end_column=5)
+        ws.cell(row=i, column=2, value=n)
+
+
+def build_household(ws):
+    title_block(
+        ws,
+        "HOUSEHOLD CASH FLOW",
+        "Dual-income household book — Person A, Person B, shared bills, leftover to save/invest.",
+        "G1",
+    )
+    set_col_widths(ws, {"A": 28, "B": 16, "C": 16, "D": 16, "E": 16, "F": 18, "G": 22})
+
+    label_cell(ws["A4"], "Person A")
+    ws["B4"] = "=Setup!B8"
+    label_cell(ws["A5"], "Person B")
+    ws["B5"] = "=Setup!B9"
+
+    section_label(ws, "A7", "Monthly Take-Home Income", COLORS["accent"])
+    ws.merge_cells("A7:D7")
+    for i, h in enumerate(["Source", "Person A", "Person B", "Combined"], start=1):
+        ws.cell(row=8, column=i, value=h)
+    style_header_row(ws, 8, 1, 4)
+
+    income_rows = [
+        ("Primary Job", 3200, 2800),
+        ("Side Income", 400, 250),
+        ("Other", 0, 0),
+    ]
+    for r, (name, a, b) in enumerate(income_rows, start=9):
+        input_cell(ws.cell(row=r, column=1), name)
+        input_cell(ws.cell(row=r, column=2), a)
+        money_format(ws.cell(row=r, column=2))
+        input_cell(ws.cell(row=r, column=3), b)
+        money_format(ws.cell(row=r, column=3))
+        ws.cell(row=r, column=4, value=f"=B{r}+C{r}")
+        money_format(ws.cell(row=r, column=4))
+
+    label_cell(ws["A12"], "Total Monthly Income")
+    ws["B12"] = "=SUM(B9:B11)"
+    ws["C12"] = "=SUM(C9:C11)"
+    ws["D12"] = "=SUM(D9:D11)"
+    for col in ("B", "C", "D"):
+        money_format(ws[f"{col}12"])
+        ws[f"{col}12"].font = font(11, bold=True)
+
+    section_label(ws, "A14", "Shared Household Expenses (Monthly)", COLORS["warn"])
+    ws.merge_cells("A14:D14")
+    for i, h in enumerate(["Expense", "Budget", "Actual", "Variance"], start=1):
+        ws.cell(row=15, column=i, value=h)
+    style_header_row(ws, 15, 1, 4)
+
+    shared = [
+        ("Rent / Mortgage", 1800, 1800),
+        ("Utilities", 250, 240),
+        ("Groceries", 650, 620),
+        ("Insurance", 220, 220),
+        ("Transport / Fuel", 300, 280),
+        ("Childcare / Family", 0, 0),
+        ("Shared Subscriptions", 95, 95),
+        ("Debt Minimums (shared)", 400, 400),
+    ]
+    for r, (name, planned, actual) in enumerate(shared, start=16):
+        input_cell(ws.cell(row=r, column=1), name)
+        input_cell(ws.cell(row=r, column=2), planned)
+        money_format(ws.cell(row=r, column=2))
+        input_cell(ws.cell(row=r, column=3), actual)
+        money_format(ws.cell(row=r, column=3))
+        ws.cell(row=r, column=4, value=f"=B{r}-C{r}")
+        money_format(ws.cell(row=r, column=4))
+
+    label_cell(ws["A24"], "Shared Expense Total")
+    ws["B24"] = "=SUM(B16:B23)"
+    ws["C24"] = "=SUM(C16:C23)"
+    ws["D24"] = "=B24-C24"
+    for col in ("B", "C", "D"):
+        money_format(ws[f"{col}24"])
+
+    section_label(ws, "A26", "Personal Allowances", COLORS["header"])
+    ws.merge_cells("A26:D26")
+    ws["A27"] = "Person A Fun Money"
+    input_cell(ws["B27"], 250)
+    money_format(ws["B27"])
+    ws["A28"] = "Person B Fun Money"
+    input_cell(ws["B28"], 250)
+    money_format(ws["B28"])
+
+    label_cell(ws["A30"], "Left to Save / Invest (Combined)")
+    ws["B30"] = "=D12-C24-B27-B28"
+    money_format(ws["B30"])
+    ws["B30"].font = font(14, bold=True, color=COLORS["accent"])
+    ws["C30"] = '=IF(D12=0,0,B30/D12)'
+    pct_format(ws["C30"])
+    ws["D30"] = "Household savings rate this month"
+    ws["D30"].font = font(10, color=COLORS["muted"])
+
+
+def build_subscriptions(ws):
+    title_block(
+        ws,
+        "SUBSCRIPTIONS AUDIT",
+        "Find money you forgot you were spending — cancel, downgrade, or keep.",
+        "H1",
+    )
+    set_col_widths(ws, {"A": 24, "B": 16, "C": 12, "D": 12, "E": 14, "F": 14, "G": 14, "H": 22})
+    headers = ["Service", "Category", "Amount", "Billing", "Owner", "Still Needed?", "Annual Cost", "Action"]
+    for i, h in enumerate(headers, start=1):
+        ws.cell(row=4, column=i, value=h)
+    style_header_row(ws, 4, 1, 8)
+
+    subs = [
+        ("Netflix", "Entertainment", 15.49, "Monthly", "Shared", "Yes", "Keep"),
+        ("Spotify Duo", "Entertainment", 14.99, "Monthly", "Shared", "Yes", "Keep"),
+        ("iCloud+", "Utilities", 2.99, "Monthly", "Person A", "Yes", "Keep"),
+        ("Adobe CC", "Work", 54.99, "Monthly", "Person B", "Maybe", "Review"),
+        ("Gym", "Health", 50.00, "Monthly", "Person A", "Yes", "Keep"),
+        ("News App", "Entertainment", 8.00, "Monthly", "Person B", "No", "Cancel"),
+        ("Meal Kit leftover", "Food", 0.00, "Monthly", "Shared", "No", "Cancel"),
+        ("Domain / Hosting", "Work", 12.00, "Monthly", "Person B", "Yes", "Keep"),
+    ]
+    for r, row in enumerate(subs, start=5):
+        for c, v in enumerate(row[:6], start=1):
+            input_cell(ws.cell(row=r, column=c), v)
+        money_format(ws.cell(row=r, column=3))
+        ws.cell(row=r, column=7, value=f'=IF(D{r}="Monthly",C{r}*12,IF(D{r}="Annual",C{r},IF(D{r}="Weekly",C{r}*52,C{r}*12)))')
+        money_format(ws.cell(row=r, column=7))
+        input_cell(ws.cell(row=r, column=8), row[6])
+
+    for r in range(13, 25):
+        for c in range(1, 9):
+            input_cell(ws.cell(row=r, column=c))
+            if c in (3, 7):
+                money_format(ws.cell(row=r, column=c))
+        ws.cell(row=r, column=7, value=f'=IF(C{r}="","",IF(D{r}="Monthly",C{r}*12,IF(D{r}="Annual",C{r},IF(D{r}="Weekly",C{r}*52,C{r}*12))))')
+
+    label_cell(ws["A26"], "Monthly Subscription Burn")
+    ws["B26"] = '=SUMIF(D5:D24,"Monthly",C5:C24)'
+    money_format(ws["B26"])
+    label_cell(ws["A27"], "Annual Subscription Burn")
+    ws["B27"] = "=SUM(G5:G24)"
+    money_format(ws["B27"])
+    ws["B27"].font = font(12, bold=True, color=COLORS["warn"])
+    label_cell(ws["A28"], "Cancel Candidates (Annual)")
+    ws["B28"] = '=SUMIF(F5:F24,"No",G5:G24)'
+    money_format(ws["B28"])
+    ws["B28"].font = font(12, bold=True, color=COLORS["accent"])
+
+    for formula1, cells in [
+        ('"Monthly,Annual,Weekly"', "D5:D24"),
+        ('"Shared,Person A,Person B"', "E5:E24"),
+        ('"Yes,No,Maybe"', "F5:F24"),
+        ('"Keep,Cancel,Downgrade,Review"', "H5:H24"),
+    ]:
+        dv = DataValidation(type="list", formula1=formula1, allow_blank=True)
+        ws.add_data_validation(dv)
+        dv.add(cells)
+
+
+def build_weekly_spend(ws):
+    title_block(
+        ws,
+        "WEEKLY VARIABLE SPEND",
+        "Envelope-style tracker for groceries, dining, transport, and fun money.",
+        "G1",
+    )
+    set_col_widths(ws, {"A": 16, "B": 14, "C": 14, "D": 14, "E": 14, "F": 14, "G": 18})
+    label_cell(ws["A4"], "Active Month")
+    input_cell(ws["B4"], "January")
+    month_dv = DataValidation(type="list", formula1='"' + ",".join(MONTHS) + '"', allow_blank=False)
+    ws.add_data_validation(month_dv)
+    month_dv.add("B4")
+
+    headers = ["Week", "Groceries", "Dining Out", "Transport", "Fun / Misc", "Week Total", "Notes"]
+    for i, h in enumerate(headers, start=1):
+        ws.cell(row=6, column=i, value=h)
+    style_header_row(ws, 6, 1, 7)
+
+    sample_weeks = [
+        ("Week 1", 160, 55, 70, 40, ""),
+        ("Week 2", 145, 80, 65, 25, ""),
+        ("Week 3", 170, 40, 75, 60, ""),
+        ("Week 4", 155, 90, 70, 35, ""),
+        ("Week 5 (if any)", 0, 0, 0, 0, ""),
+    ]
+    for r, row in enumerate(sample_weeks, start=7):
+        input_cell(ws.cell(row=r, column=1), row[0])
+        for c, v in enumerate(row[1:5], start=2):
+            input_cell(ws.cell(row=r, column=c), v)
+            money_format(ws.cell(row=r, column=c))
+        ws.cell(row=r, column=6, value=f"=SUM(B{r}:E{r})")
+        money_format(ws.cell(row=r, column=6))
+        input_cell(ws.cell(row=r, column=7), row[5])
+
+    label_cell(ws["A13"], "Month Total")
+    ws["B13"] = "=SUM(B7:B11)"
+    ws["C13"] = "=SUM(C7:C11)"
+    ws["D13"] = "=SUM(D7:D11)"
+    ws["E13"] = "=SUM(E7:E11)"
+    ws["F13"] = "=SUM(F7:F11)"
+    for col in ("B", "C", "D", "E", "F"):
+        money_format(ws[f"{col}13"])
+        ws[f"{col}13"].font = font(11, bold=True)
+
+    label_cell(ws["A15"], "Weekly Average")
+    ws["B15"] = "=IF(COUNTIF(F7:F11,\">0\")=0,0,F13/COUNTIF(F7:F11,\">0\"))"
+    money_format(ws["B15"])
+
+
+def build_paycheck_budget(ws):
+    title_block(
+        ws,
+        "PAYCHECK BUDGET",
+        "Budget by paycheck — perfect for bi-weekly or irregular household income.",
+        "H1",
+    )
+    set_col_widths(ws, {"A": 24, "B": 14, "C": 14, "D": 14, "E": 14, "F": 14, "G": 14, "H": 20})
+
+    label_cell(ws["A4"], "Pay Frequency")
+    ws["B4"] = "=Setup!B10"
+    label_cell(ws["A5"], "Next Payday")
+    input_cell(ws["B5"], "2026-01-09")
+
+    headers = [
+        "Paycheck #",
+        "Pay Date",
+        "Person A Net",
+        "Person B Net",
+        "Total In",
+        "Bills Assigned",
+        "Left to Assign",
+        "Notes",
+    ]
+    for i, h in enumerate(headers, start=1):
+        ws.cell(row=7, column=i, value=h)
+    style_header_row(ws, 7, 1, 8)
+
+    pays = [
+        (1, "2026-01-09", 1600, 1400, 1850, "Rent half + utilities"),
+        (2, "2026-01-23", 1600, 1400, 1200, "Groceries + debt + fun"),
+        (3, "2026-02-06", 1600, 1400, 1850, ""),
+        (4, "2026-02-20", 1600, 1400, 1200, ""),
+        (5, "2026-03-06", 1600, 1400, 1850, ""),
+        (6, "2026-03-20", 1600, 1400, 1200, ""),
+    ]
+    for r, row in enumerate(pays, start=8):
+        input_cell(ws.cell(row=r, column=1), row[0])
+        input_cell(ws.cell(row=r, column=2), row[1])
+        input_cell(ws.cell(row=r, column=3), row[2])
+        money_format(ws.cell(row=r, column=3))
+        input_cell(ws.cell(row=r, column=4), row[3])
+        money_format(ws.cell(row=r, column=4))
+        ws.cell(row=r, column=5, value=f"=C{r}+D{r}")
+        money_format(ws.cell(row=r, column=5))
+        input_cell(ws.cell(row=r, column=6), row[4])
+        money_format(ws.cell(row=r, column=6))
+        ws.cell(row=r, column=7, value=f"=E{r}-F{r}")
+        money_format(ws.cell(row=r, column=7))
+        input_cell(ws.cell(row=r, column=8), row[5])
+
+    for r in range(14, 34):
+        for c in range(1, 9):
+            input_cell(ws.cell(row=r, column=c))
+            if c in (3, 4, 5, 6, 7):
+                money_format(ws.cell(row=r, column=c))
+        ws.cell(row=r, column=5, value=f'=IF(AND(C{r}="",D{r}=""),"",C{r}+D{r})')
+        ws.cell(row=r, column=7, value=f'=IF(E{r}="","",E{r}-F{r})')
+
+    label_cell(ws["A35"], "YTD Paycheck Income")
+    ws["B35"] = "=SUM(E8:E33)"
+    money_format(ws["B35"])
+    label_cell(ws["A36"], "YTD Bills Assigned")
+    ws["B36"] = "=SUM(F8:F33)"
+    money_format(ws["B36"])
+    label_cell(ws["A37"], "Unassigned Buffer")
+    ws["B37"] = "=B35-B36"
+    money_format(ws["B37"])
+    ws["B37"].font = font(12, bold=True, color=COLORS["accent"])
+
+
+def build_distribution(ws):
+    title_block(
+        ws,
+        "INCOME & EXPENSE DISTRIBUTION",
+        "See where household money comes from and where it goes — annual mix.",
+        "F1",
+    )
+    set_col_widths(ws, {"A": 24, "B": 16, "C": 14, "D": 18, "E": 16, "F": 16})
+
+    section_label(ws, "A4", "Annual Expense Mix", COLORS["header"])
+    ws.merge_cells("A4:C4")
+    ws["A5"] = "Category"
+    ws["B5"] = "Annual $"
+    ws["C5"] = "% of Expenses"
+    style_header_row(ws, 5, 1, 3)
+
+    for i, cat in enumerate(EXPENSE_CATS, start=6):
+        src = 16 + i - 6
+        ws.cell(row=i, column=1, value=cat).border = THIN
+        ws.cell(row=i, column=2, value=f"='Annual Dashboard'!N{src}")
+        money_format(ws.cell(row=i, column=2))
+        ws.cell(row=i, column=3, value=f"=IF('Annual Dashboard'!N10=0,0,B{i}/'Annual Dashboard'!N10)")
+        pct_format(ws.cell(row=i, column=3))
+
+    label_cell(ws["A24"], "Expense Total")
+    ws["B24"] = "=SUM(B6:B23)"
+    money_format(ws["B24"])
+
+    pie = PieChart()
+    pie.title = "Where Expenses Go"
+    labels = Reference(ws, min_col=1, min_row=6, max_row=23)
+    data = Reference(ws, min_col=2, min_row=5, max_row=23)
+    pie.add_data(data, titles_from_data=True)
+    pie.set_categories(labels)
+    pie.dataLabels = DataLabelList()
+    pie.dataLabels.showPercent = True
+    pie.width = 14
+    pie.height = 10
+    ws.add_chart(pie, "E4")
+
+    section_label(ws, "A26", "Cash Flow Snapshot", COLORS["accent"])
+    ws.merge_cells("A26:C26")
+    label_cell(ws["A27"], "Annual Income")
+    ws["B27"] = "='Annual Dashboard'!N9"
+    money_format(ws["B27"])
+    label_cell(ws["A28"], "Annual Expenses")
+    ws["B28"] = "='Annual Dashboard'!N10"
+    money_format(ws["B28"])
+    label_cell(ws["A29"], "Annual Savings")
+    ws["B29"] = "='Annual Dashboard'!N11"
+    money_format(ws["B29"])
+    label_cell(ws["A30"], "Savings Rate")
+    ws["B30"] = "='Annual Dashboard'!N12"
+    pct_format(ws["B30"])
+
+
+def build_investments(ws):
+    title_block(
+        ws,
+        "INVESTMENTS FORECAST",
+        "Track contributions and project portfolio growth by account.",
+        "H1",
+    )
+    set_col_widths(ws, {"A": 22, "B": 14, "C": 14, "D": 14, "E": 14, "F": 16, "G": 14, "H": 20})
+    headers = [
+        "Account",
+        "Balance Now",
+        "Monthly Add",
+        "Expected Return",
+        "Years",
+        "Future Value",
+        "Owner",
+        "Notes",
+    ]
+    for i, h in enumerate(headers, start=1):
+        ws.cell(row=4, column=i, value=h)
+    style_header_row(ws, 4, 1, 8)
+
+    inv = [
+        ("Brokerage", 15000, 400, 0.075, 5, "Shared", "Index funds"),
+        ("401(k) Person A", 28000, 500, 0.07, 5, "Person A", "With match"),
+        ("401(k) Person B", 14000, 350, 0.07, 5, "Person B", ""),
+        ("Roth IRA", 9000, 200, 0.075, 5, "Person A", ""),
+        ("Kids 529 (optional)", 2500, 100, 0.06, 5, "Shared", ""),
+    ]
+    for r, row in enumerate(inv, start=5):
+        input_cell(ws.cell(row=r, column=1), row[0])
+        input_cell(ws.cell(row=r, column=2), row[1])
+        money_format(ws.cell(row=r, column=2))
+        input_cell(ws.cell(row=r, column=3), row[2])
+        money_format(ws.cell(row=r, column=3))
+        input_cell(ws.cell(row=r, column=4), row[3])
+        pct_format(ws.cell(row=r, column=4))
+        input_cell(ws.cell(row=r, column=5), row[4])
+        # FV of current balance + annuity of monthly adds
+        ws.cell(
+            row=r,
+            column=6,
+            value=f'=IF(B{r}="","",FV(D{r}/12,E{r}*12,-C{r},-B{r}))',
+        )
+        money_format(ws.cell(row=r, column=6))
+        input_cell(ws.cell(row=r, column=7), row[5])
+        input_cell(ws.cell(row=r, column=8), row[6])
+
+    for r in range(10, 20):
+        for c in range(1, 9):
+            input_cell(ws.cell(row=r, column=c))
+            if c in (2, 3, 6):
+                money_format(ws.cell(row=r, column=c))
+            if c == 4:
+                pct_format(ws.cell(row=r, column=c))
+        ws.cell(row=r, column=6, value=f'=IF(OR(B{r}="",E{r}=""),"",FV(D{r}/12,E{r}*12,-C{r},-B{r}))')
+
+    label_cell(ws["A21"], "Total Balance Now")
+    ws["B21"] = "=SUM(B5:B19)"
+    money_format(ws["B21"])
+    label_cell(ws["A22"], "Total Monthly Adds")
+    ws["B22"] = "=SUM(C5:C19)"
+    money_format(ws["B22"])
+    label_cell(ws["A23"], "Projected Future Value")
+    ws["B23"] = "=SUM(F5:F19)"
+    money_format(ws["B23"])
+    ws["B23"].font = font(13, bold=True, color=COLORS["accent"])
+
+
+def build_no_spend(ws):
+    title_block(
+        ws,
+        "NO-SPEND CHALLENGE",
+        "Cut discretionary leaks for 7 / 14 / 30 days — track wins and money saved.",
+        "G1",
+    )
+    set_col_widths(ws, {"A": 22, "B": 14, "C": 14, "D": 16, "E": 16, "F": 16, "G": 28})
+    headers = [
+        "Challenge Name",
+        "Start Date",
+        "Days",
+        "Categories Blocked",
+        "Money Saved",
+        "Completed?",
+        "Notes",
+    ]
+    for i, h in enumerate(headers, start=1):
+        ws.cell(row=4, column=i, value=h)
+    style_header_row(ws, 4, 1, 7)
+
+    challenges = [
+        ("January No-Dining", "2026-01-06", 14, "Dining Out", 180, "Yes", "Cooked at home"),
+        ("Subscription Freeze", "2026-02-01", 30, "Subscriptions", 45, "In Progress", "Paused one app"),
+        ("Coffee Shop Pause", "2026-03-01", 7, "Dining Out", 28, "No", ""),
+        ("Impulse Buy Ban", "2026-04-01", 21, "Clothing, Misc", 0, "Planned", ""),
+        ("Entertainment Reset", "2026-05-01", 14, "Entertainment", 0, "Planned", ""),
+    ]
+    for r, row in enumerate(challenges, start=5):
+        for c, v in enumerate(row, start=1):
+            input_cell(ws.cell(row=r, column=c), v)
+            if c == 5:
+                money_format(ws.cell(row=r, column=c))
+
+    for r in range(10, 16):
+        for c in range(1, 8):
+            input_cell(ws.cell(row=r, column=c))
+            if c == 5:
+                money_format(ws.cell(row=r, column=c))
+
+    status_dv = DataValidation(type="list", formula1='"Yes,No,In Progress,Planned"', allow_blank=True)
+    ws.add_data_validation(status_dv)
+    status_dv.add("F5:F15")
+
+    label_cell(ws["A17"], "Total Saved from Challenges")
+    ws["B17"] = "=SUM(E5:E15)"
+    money_format(ws["B17"])
+    ws["B17"].font = font(13, bold=True, color=COLORS["accent"])
+    label_cell(ws["A18"], "Completed Challenges")
+    ws["B18"] = '=COUNTIF(F5:F15,"Yes")'
+
+
 def style_sheet_tabs(wb: Workbook):
     tab_colors = {
         "Instructions": "3D4F5F",
+        "Google Sheets Guide": "3D4F5F",
         "Setup": "6B8F71",
+        "Household": "6B8F71",
         "Accounts": "6B8F71",
         "Recurring": "C4A484",
         "Transactions": "C4A484",
+        "Subscriptions": "C4A484",
+        "Weekly Spend": "C4A484",
+        "Paycheck Budget": "C4A484",
         "Annual Dashboard": "3D4F5F",
+        "Distribution": "3D4F5F",
         "Quarterly": "3D4F5F",
         "50-30-20": "6B8F71",
         "Net Worth": "6B8F71",
         "Debt Tracker": "C4785A",
         "Sinking Funds": "6B8F71",
         "Emergency Fund": "6B8F71",
+        "Investments": "6B8F71",
         "Wealth Projection": "3D4F5F",
         "Health Score": "3D4F5F",
+        "No-Spend Challenge": "C4785A",
         "Bill Calendar": "C4A484",
     }
     for name, color in tab_colors.items():
@@ -1499,66 +2017,53 @@ def build_workbook(output_path: Path) -> Path:
     sample = generate_sample_monthly()
     wb = Workbook()
 
-    # Instructions
     ws = wb.active
     ws.title = "Instructions"
     build_instructions(ws)
 
-    ws_setup = wb.create_sheet("Setup")
-    build_setup(ws_setup)
-
-    ws_accounts = wb.create_sheet("Accounts")
-    build_accounts(ws_accounts)
-
-    ws_recurring = wb.create_sheet("Recurring")
-    build_recurring(ws_recurring, sample)
+    build_google_sheets_guide(wb.create_sheet("Google Sheets Guide"))
+    build_setup(wb.create_sheet("Setup"))
+    build_household(wb.create_sheet("Household"))
+    build_accounts(wb.create_sheet("Accounts"))
+    build_recurring(wb.create_sheet("Recurring"), sample)
 
     ws_tx = wb.create_sheet("Transactions")
     build_transactions(ws_tx, sample)
     tx_last = getattr(ws_tx, "_tx_last_row", 200)
 
-    # Monthly sheets
+    build_subscriptions(wb.create_sheet("Subscriptions"))
+    build_weekly_spend(wb.create_sheet("Weekly Spend"))
+    build_paycheck_budget(wb.create_sheet("Paycheck Budget"))
+
     for idx, month in enumerate(MONTHS):
-        ws_m = wb.create_sheet(month)
-        build_monthly_sheet(ws_m, month, idx, sample, tx_last)
+        build_monthly_sheet(wb.create_sheet(month), month, idx, sample, tx_last)
 
-    ws_annual = wb.create_sheet("Annual Dashboard")
-    build_annual_dashboard(ws_annual, sample)
-
-    ws_q = wb.create_sheet("Quarterly")
-    build_quarterly(ws_q)
-
-    ws_5020 = wb.create_sheet("50-30-20")
-    build_502030(ws_5020)
-
-    ws_nw = wb.create_sheet("Net Worth")
-    build_net_worth(ws_nw)
-
-    ws_debt = wb.create_sheet("Debt Tracker")
-    build_debt(ws_debt)
-
-    ws_sink = wb.create_sheet("Sinking Funds")
-    build_sinking(ws_sink)
-
-    ws_ef = wb.create_sheet("Emergency Fund")
-    build_emergency(ws_ef)
-
-    ws_wealth = wb.create_sheet("Wealth Projection")
-    build_wealth(ws_wealth)
-
-    ws_health = wb.create_sheet("Health Score")
-    build_health(ws_health)
-
-    ws_bills = wb.create_sheet("Bill Calendar")
-    build_bill_calendar(ws_bills)
+    build_annual_dashboard(wb.create_sheet("Annual Dashboard"), sample)
+    build_distribution(wb.create_sheet("Distribution"))
+    build_quarterly(wb.create_sheet("Quarterly"))
+    build_502030(wb.create_sheet("50-30-20"))
+    build_net_worth(wb.create_sheet("Net Worth"))
+    build_debt(wb.create_sheet("Debt Tracker"))
+    build_sinking(wb.create_sheet("Sinking Funds"))
+    build_emergency(wb.create_sheet("Emergency Fund"))
+    build_investments(wb.create_sheet("Investments"))
+    build_wealth(wb.create_sheet("Wealth Projection"))
+    build_health(wb.create_sheet("Health Score"))
+    build_no_spend(wb.create_sheet("No-Spend Challenge"))
+    build_bill_calendar(wb.create_sheet("Bill Calendar"))
 
     style_sheet_tabs(wb)
 
-    # Freeze panes for usability
     for name in wb.sheetnames:
-        if name in MONTHS or name in ("Transactions", "Annual Dashboard", "Bill Calendar"):
+        if name in MONTHS or name in (
+            "Transactions",
+            "Annual Dashboard",
+            "Bill Calendar",
+            "Subscriptions",
+            "Paycheck Budget",
+        ):
             wb[name].freeze_panes = "A5"
-        elif name != "Instructions":
+        elif name not in ("Instructions", "Google Sheets Guide"):
             wb[name].freeze_panes = "A3"
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -1568,23 +2073,27 @@ def build_workbook(output_path: Path) -> Path:
 
 def main():
     root = Path(__file__).resolve().parent
-    out = root / "output" / "Ultimate_Annual_Monthly_Budget_Planner.xlsx"
-    path = build_workbook(out)
-    # Also copy to artifacts for easy download
+    filenames = [
+        "Premium_Household_Budget_Planner.xlsx",
+        "Ultimate_Annual_Monthly_Budget_Planner.xlsx",
+    ]
+    primary = root / "output" / filenames[0]
+    path = build_workbook(primary)
+
     artifacts = root / "artifacts"
     artifacts.mkdir(exist_ok=True)
-    artifact_path = artifacts / "Ultimate_Annual_Monthly_Budget_Planner.xlsx"
-    artifact_path.write_bytes(path.read_bytes())
+    for name in filenames:
+        (root / "output" / name).write_bytes(path.read_bytes())
+        (artifacts / name).write_bytes(path.read_bytes())
 
-    # Print verification summary
     from openpyxl import load_workbook
 
     wb = load_workbook(path, data_only=False)
     print("=" * 60)
-    print("EXCEL BUDGET PLANNER GENERATED")
+    print("PREMIUM HOUSEHOLD BUDGET PLANNER GENERATED")
     print("=" * 60)
     print(f"File: {path}")
-    print(f"Copy: {artifact_path}")
+    print(f"Also: {artifacts / filenames[0]}")
     print(f"Sheets ({len(wb.sheetnames)}):")
     for name in wb.sheetnames:
         print(f"  - {name}")
